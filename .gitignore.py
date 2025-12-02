@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.idea/
+.vscode/
+geckodriver.log
+chromedriver.log
+*.log
+.DS_Store
+Thumbs.db
