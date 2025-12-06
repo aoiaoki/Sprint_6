@@ -17,3 +17,4 @@ class TestFAQ:
         with allure.step("Проверить, что ответ не пустой"):
             answer = page.get_faq_answer_text(index)
             assert answer.strip() != "", f"FAQ #{index} возвращает пустой ответ"
+

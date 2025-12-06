@@ -66,3 +66,4 @@ class OrderPage(BasePage):
     def confirm_order(self):
         self.wait_for_visibility(self.CONFIRM_YES)
         self.js_click(self.CONFIRM_YES)
+

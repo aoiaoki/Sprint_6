@@ -15,3 +15,4 @@ class FinalPage(BasePage):
             return self.wait_for_visibility(self.SUCCESS_MODAL).is_displayed()
         except Exception:
             return False
+

@@ -55,3 +55,4 @@ class BasePage:
     def js_click(self, locator):
         elem = self.wait_for_visibility(locator)
         self.driver.execute_script("arguments[0].click();", elem)
+

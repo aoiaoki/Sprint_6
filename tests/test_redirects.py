@@ -21,3 +21,4 @@ class TestRedirects:
         page.switch_to_last_tab()
         page.wait_for_url_contains("dzen", timeout=15)
         assert "dzen" in page.get_current_url().lower()
+

@@ -40,3 +40,4 @@ class TestOrderFlow:
         order.confirm_order()
 
         assert final.order_success_visible(), "Окно успешного оформления не появилось"
+

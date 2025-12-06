@@ -64,3 +64,4 @@ class MainPage(BasePage):
     @allure.step("Клик по логотипу Yandex")
     def click_logo_yandex(self):
         self.click(self.LOGO_YANDEX)
+
