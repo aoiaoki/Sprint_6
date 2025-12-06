@@ -1,17 +1,17 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.base_page import BasePage
+import allure
 
 
-class FinalPage:
+class FinalPage(BasePage):
+    SUCCESS_MODAL = (By.CLASS_NAME, "Order_ModalHeader__3FDaJ")
+
     def __init__(self, driver):
-        self.driver = driver
-        self.wait = WebDriverWait(driver, 10)
+        super().__init__(driver)
 
-        # Модалка "Заказ оформлен"
-        self.SUCCESS_MODAL = (By.CLASS_NAME, "Order_ModalHeader__3FDaJ")
-
-    def order_success_visible(self):
-        return self.wait.until(
-            EC.visibility_of_element_located(self.SUCCESS_MODAL)
-        ).is_displayed()
+    @allure.step("Проверить что окно 'Заказ оформлен' отображается")
+    def order_success_visible(self) -> bool:
+        try:
+            return self.wait_for_visibility(self.SUCCESS_MODAL).is_displayed()
+        except Exception:
+            return False

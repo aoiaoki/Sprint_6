@@ -1,4 +1,5 @@
 __pycache__/
+*/__pycache__/
 *.py[cod]
 *$py.class
 .idea/
@@ -8,3 +9,6 @@ chromedriver.log
 *.log
 .DS_Store
 Thumbs.db
+allure-results/
+allure-report/
+*.iml
