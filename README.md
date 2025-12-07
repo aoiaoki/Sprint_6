@@ -6,6 +6,10 @@
 ## 📌 Структура проекта
 Sprint_6/
 │
+├──data
+│ ├── faq_answers.py
+│ └── test_data.py
+│
 ├── pages/ # Page Object Model (POM)
 │ ├── base_page.py
 │ ├── main_page.py
@@ -17,5 +21,6 @@ Sprint_6/
 │ ├── test_order.py
 │ └── test_redirects.py
 │
+├── urls.py
 ├── conftest.py
-└── README.md
+└── README.md 
