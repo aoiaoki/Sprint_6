@@ -8,6 +8,7 @@ class OrderPage(BasePage):
     NAME = (By.XPATH, "//input[@placeholder='* Имя']")
     SURNAME = (By.XPATH, "//input[@placeholder='* Фамилия']")
     ADDRESS = (By.XPATH, "//input[@placeholder='* Адрес: куда привезти заказ']")
+
     METRO_FIELD = (By.CLASS_NAME, "select-search__input")
     PHONE = (By.XPATH, "//input[@placeholder='* Телефон: на него позвонит курьер']")
     NEXT_BUTTON = (By.XPATH, "//button[text()='Далее']")
@@ -44,7 +45,9 @@ class OrderPage(BasePage):
     @allure.step("Выбрать срок аренды: {rent}")
     def select_rental_period(self, rent: str):
         self.click(self.RENTAL_PERIOD)
-        options = self.wait.until(lambda d: d.find_elements(*self.RENTAL_DROPDOWN_OPTIONS))
+        options = self.wait.until(
+            lambda d: d.find_elements(*self.RENTAL_DROPDOWN_OPTIONS)
+        )
         for option in options:
             if option.text.strip() == rent:
                 option.click()
@@ -66,4 +69,3 @@ class OrderPage(BasePage):
     def confirm_order(self):
         self.wait_for_visibility(self.CONFIRM_YES)
         self.js_click(self.CONFIRM_YES)
-

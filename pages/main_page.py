@@ -5,7 +5,7 @@ from urls import QA_SCOOTER_BASE
 
 
 class MainPage(BasePage):
-    ORDER_BUTTON_TOP = (By.XPATH, "//button[contains(@class, 'Button_Button') and text()='Заказать']")
+    ORDER_BUTTON_TOP = (By.XPATH, "//button[contains(@class, 'Button_Button') and contains(normalize-space(), 'Заказать')]")
     ORDER_BUTTON_BOTTOM_SECTION = (By.CLASS_NAME, "Home_FinishButton__1_cWm")
     ORDER_BUTTON_BOTTOM = (By.XPATH, "//div[contains(@class, 'Home_FinishButton')]/button")
 
@@ -22,7 +22,7 @@ class MainPage(BasePage):
     def open(self):
         super().open(QA_SCOOTER_BASE)
 
-    @allure.step("Закрыть cookie-баннер")
+    @allure.step("Закрыть cookie-баннер (если отображён)")
     def close_cookie_banner(self):
         try:
             self.click(self.COOKIE_ACCEPT)
@@ -47,15 +47,15 @@ class MainPage(BasePage):
     @allure.step("Открыть FAQ-вопрос №{index}")
     def open_faq_question(self, index: int):
         self.wait_for_visibility(self.FAQ_ROOT)
-        question = self.faq_question_locator(index)
-        self.scroll_into_view(question)
-        self.js_click(question)
+        locator = self.faq_question_locator(index)
+        self.scroll_into_view(locator)
+        self.js_click(locator)
 
-    @allure.step("Получить текст FAQ-ответа №{index}")
+    @allure.step("Получить текст ответа FAQ №{index}")
     def get_faq_answer_text(self, index: int) -> str:
-        answer = self.faq_answer_locator(index)
-        self.wait_for_visibility(answer)
-        return self.get_text(answer)
+        locator = self.faq_answer_locator(index)
+        self.wait_for_visibility(locator)
+        return self.get_text(locator)
 
     @allure.step("Клик по логотипу Scooter")
     def click_logo_scooter(self):
@@ -64,4 +64,3 @@ class MainPage(BasePage):
     @allure.step("Клик по логотипу Yandex")
     def click_logo_yandex(self):
         self.click(self.LOGO_YANDEX)
-

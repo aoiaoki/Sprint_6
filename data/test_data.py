@@ -20,4 +20,3 @@ data_sets = [
         "colors": ["grey"]
     }
 ]
-

@@ -1,24 +1,39 @@
-import pytest
 import allure
 from pages.main_page import MainPage
 
 
-@allure.title("Переход по логотипу скутера ведёт на домен qa-scooter")
-class TestRedirects:
-    def test_logo_scooter_redirect(self, driver):
-        page = MainPage(driver)
-        page.open()
-        page.click_logo_scooter()
-        page.wait_for_url_contains("qa-scooter")
-        assert "qa-scooter" in page.get_current_url()
+@allure.title("Редирект по клику на логотип Scooter")
+def test_logo_scooter_redirect(driver):
+    page = MainPage(driver)
 
-    def test_logo_yandex_redirect(self, driver):
-        page = MainPage(driver)
+    with allure.step("Открыть главную страницу"):
         page.open()
+        page.close_cookie_banner()
+
+    with allure.step("Кликнуть на логотип Scooter"):
+        page.click_logo_scooter()
+
+    with allure.step("Проверить, что остались на домене qa-scooter"):
+        page.wait_for_url_contains("qa-scooter")
+        assert "qa-scooter" in page.get_current_url(), \
+            "Редирект по лого Scooter работает неверно"
+
+
+@allure.title("Редирект по клику на логотип Yandex/Dzen")
+def test_logo_yandex_redirect(driver):
+    page = MainPage(driver)
+
+    with allure.step("Открыть главную страницу"):
+        page.open()
+        page.close_cookie_banner()
+
+    with allure.step("Кликнуть на логотип Yandex"):
         page.click_logo_yandex()
 
-        # новая вкладка открывается в результате клика
+    with allure.step("Переключиться на новую вкладку"):
         page.switch_to_last_tab()
-        page.wait_for_url_contains("dzen", timeout=15)
-        assert "dzen" in page.get_current_url().lower()
 
+    with allure.step("Проверить, что произошёл редирект на dzen"):
+        page.wait_for_url_contains("dzen", timeout=15)
+        assert "dzen" in page.get_current_url().lower(), \
+            "Редирект по лого Yandex работает неверно"
